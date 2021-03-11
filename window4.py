@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QVBoxLayout, QLabel, QWidget, QApplication, QLineEdit, \
-    QPushButton,QMessageBox
+    QPushButton, QMessageBox
 from PyQt5.QtCore import Qt
 
 
@@ -16,8 +16,6 @@ class SpecialBG(QLabel):
                 border: 1px solid rgba(237,174,28,100%);
                 padding: 0px;
                 """)
-
-
 
 
 class RoundedCorners(QWidget):
@@ -56,14 +54,16 @@ class RoundedCorners(QWidget):
 
         self.show()
 
-
     def on_click(self):
         textboxValue = self.textbox.text()
+        if textboxValue == "exit":
+            sys.exit()
         QMessageBox.question(self,
                              'Message - pythonspot.com',
                              "You typed: " + textboxValue
                              )
         self.textbox.setText("")
+
 
 def main():
     app = QApplication(sys.argv)
