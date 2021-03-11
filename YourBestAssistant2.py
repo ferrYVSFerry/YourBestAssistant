@@ -2,7 +2,7 @@
 File contente le informazioni prime che inizializzano una prima versione dell'assistente virtuale/vocale
 
 by Ferrara Lorenzo
-please don't modify this files unless you are sure of what you are doing
+please don't modify this files unless you are sure of what you are doing :(((((((
 """
 
 
@@ -15,6 +15,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(381, 335)
         MainWindow.setMinimumSize(381, 335)
+        MainWindow.setMaximumSize(381, 335)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
