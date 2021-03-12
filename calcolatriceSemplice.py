@@ -16,6 +16,7 @@ def number_display():
         x = x + str(number[i])
     return x
 
+
 def operazione():
     if stack[1] == "+":
         x = stack[0] + Ui_MainWindow.setupUi
@@ -25,6 +26,7 @@ def operazione():
         print("pop")
     else:
         print("pop")
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -152,25 +154,18 @@ class Ui_MainWindow(object):
         self.Funzione_uguale.setText(_translate("MainWindow", "="))
 
     def button_pressed(self, text):
-        if isinstance(text, int):
-            if not self.textEdit1.toPlainText():
-                number.append(text)
-                self.textEdit.setText(number_display())
-                print(stack)
+        if not isinstance(text, int):
+            if not self.textEdit.toPlainText():
+                self.textEdit.setText("ERRORE")
             else:
-                stack.append(int(self.textEdit.toPlainText()))
-                stack.append(self.textEdit1.toPlainText())
-                self.textEdit.clear()
-                self.textEdit1.clear()
-                number.clear()
-                number.append(text)
-                self.textEdit.setText(number_display())
-                print(stack)
-        elif text == "=":
-            print("mammt")
+                self.textEdit1.setText(text)
+                stack.append(text)
+        elif not stack:
+            number.append(text)
+            self.textEdit.setText(number_display())
         else:
-            self.textEdit1.setText(text)
-            print(stack)
+            number.clear()
+            stack.append(int(self.textEdit.toPlainText()))
 
 
 if __name__ == "__main__":
