@@ -1,9 +1,14 @@
 from PyQt5 import QtCore, QtWidgets
 from datetime import datetime
+import os
 
 
 def close():
     sys.exit()
+
+
+def assistance():
+    os.system("ReportABug.py")
 
 
 class Ui_Assistant(object):
@@ -52,6 +57,7 @@ class Ui_Assistant(object):
         self.commandLinkButton = QtWidgets.QCommandLinkButton(self.centralwidget)
         self.commandLinkButton.setGeometry(QtCore.QRect(10, 400, 131, 41))
         self.commandLinkButton.setObjectName("commandLinkButton")
+        self.commandLinkButton.clicked.connect(assistance)
 
         self.commandLinkButton_2 = QtWidgets.QCommandLinkButton(self.centralwidget)
         self.commandLinkButton_2.setGeometry(QtCore.QRect(400, 400, 141, 41))
