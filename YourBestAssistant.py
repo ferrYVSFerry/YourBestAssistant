@@ -102,7 +102,7 @@ class Ui_Assistant(object):
                 self.AssistantAnswers.append("[" + current_time + "] Scusa, ma non ho capito bene, potresti ripetere?")
             if search in text:
                 key = text.replace("Cerca ", "")
-                webbrowser.open_new("https://www.google.com/search?client=firefox-b-d&q=" + key)
+                webbrowser.open_new("https://www.google.com/search?client=firefox-b-d&q="+key)
             if text == "Help":
                 self.AssistantAnswers.append("[" + current_time + "] Per la funzione ricerca digitare: Cerca (es: "
                                                                   "Cerca Casa)")
