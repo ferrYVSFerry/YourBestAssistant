@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtWidgets
 from datetime import datetime
-import os
+import subprocess
+import webbrowser
 
 
 def close():
@@ -8,7 +9,7 @@ def close():
 
 
 def assistance():
-    os.system("ReportABug.py")
+    subprocess.check_call([sys.executable, 'ReportABug.py'])
 
 
 class Ui_Assistant(object):
@@ -87,6 +88,7 @@ class Ui_Assistant(object):
 
     def richiesta(self, text):
         now = datetime.now()
+        search = "Cerca "
         if text == "":
             return
         else:
@@ -98,6 +100,14 @@ class Ui_Assistant(object):
                                                                   "\"Help\" per una serie di aiuti.")
             else:
                 self.AssistantAnswers.append("[" + current_time + "] Scusa, ma non ho capito bene, potresti ripetere?")
+            if search in text:
+                key = text.replace("Cerca ", "")
+                webbrowser.open_new("https://www.google.com/search?client=firefox-b-d&q=" + key)
+            if text == "Help":
+                self.AssistantAnswers.append("[" + current_time + "] Per la funzione ricerca digitare: Cerca (es: "
+                                                                  "Cerca Casa)")
+            if text == "exit":
+                exit()
 
 
 if __name__ == "__main__":
