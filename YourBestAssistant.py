@@ -89,6 +89,7 @@ class Ui_Assistant(object):
     def richiesta(self, text):
         now = datetime.now()
         search = "Cerca "
+        open = "Apri "
         if text == "":
             return
         else:
@@ -98,16 +99,16 @@ class Ui_Assistant(object):
             if text == "Ciao" or text == "ciao":
                 self.AssistantAnswers.append("[" + current_time + "] Ciao! Sono il tuo assistente personale. Scrivi "
                                                                   "\"Help\" per una serie di aiuti.")
-            else:
-                self.AssistantAnswers.append("[" + current_time + "] Scusa, ma non ho capito bene, potresti ripetere?")
-            if search in text:
+            elif search in text:
                 key = text.replace("Cerca ", "")
                 webbrowser.open_new("https://www.google.com/search?client=firefox-b-d&q=" + key)
-            if text == "Help":
+            elif text == "Help" or text == "help":
                 self.AssistantAnswers.append("[" + current_time + "] Per la funzione ricerca digitare: Cerca (es: "
                                                                   "Cerca Casa)")
-            if text == "exit":
-                exit()
+            elif text == "Exit" or text == "exit":
+                sys.exit()
+            else:
+                self.AssistantAnswers.append("[" + current_time + "] Scusa, ma non ho capito bene, potresti ripetere?")
 
 
 if __name__ == "__main__":
