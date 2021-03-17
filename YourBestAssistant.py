@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtWidgets
 from datetime import datetime
 import subprocess
 import webbrowser
+import TTS
 
 
 def close():
@@ -10,6 +11,10 @@ def close():
 
 def assistance():
     subprocess.check_call([sys.executable, 'ReportABug.py'])
+
+
+def tts(text):
+    TTS.tts_it(text)
 
 
 class Ui_Assistant(object):
@@ -99,6 +104,7 @@ class Ui_Assistant(object):
             if text == "Ciao" or text == "ciao":
                 self.AssistantAnswers.append("[" + current_time + "] Ciao! Sono il tuo assistente personale. Scrivi "
                                                                   "\"Help\" per una serie di aiuti.")
+                tts("Ciao! Sono il tuo assistente personale, Scrivi Help per una serie di aiuti.")
             elif search in text:
                 key = text.replace("Cerca ", "")
                 webbrowser.open_new("https://www.google.com/search?client=firefox-b-d&q=" + key)
