@@ -19,8 +19,8 @@ query = input("inserisci la parola ""\n")
 print("1) Google Search Results ""\n")
 print("2) Youtube Links""\n")
 choice = input("Opzione 1 o 2? ""\n")
-my_api_key = "QuI cI deVi MeTteRe Il caBzo"
-my_cse_id = "vafammoc"
+my_api_key = "AIzaSyB3GZwgnSJYUqFJLXCEY12vsISBAe2CIbw"
+my_cse_id = "a1c10504d73c92fc4"
 if choice == "1":
     def google_search(search_term, api_key, cse_id, **kwargs):
         service = build("customsearch", "v1", developerKey=api_key)
@@ -41,6 +41,7 @@ if choice == "1":
     html_snippet = html_snippet.replace("&nbsp;…", ".")
     print("Description == " + snippet + html_snippet)
     print("\n\n")
+
 
 # continua a non funzionare l'opzione 2
 if choice == "2":

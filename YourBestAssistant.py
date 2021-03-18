@@ -2,7 +2,10 @@ from PyQt5 import QtCore, QtWidgets
 from datetime import datetime
 import subprocess
 import webbrowser
-import TTS
+# import TTS
+import urllib.request
+import re
+from googleapiclient.discovery import build
 import time
 
 
@@ -107,8 +110,47 @@ class Ui_Assistant(object):
                                                                   "\"Help\" per una serie di aiuti.")
                 tts("Ciao! Sono il tuo assistente personale. Scrivi help per una serie di aiuti.")
             elif search in text:
-                key = text.replace("Cerca ", "")
-                webbrowser.open_new("https://www.google.com/search?client=firefox-b-d&q=" + key)
+                query = text.replace("Cerca ", "")
+                self.AssistantAnswers.append("[" + current_time + "] 1) Google Search Results ""\n"
+                                                                  "2) Youtube Links""\n")
+
+                if text == "":
+                    return
+                else:
+                    choice = input(self.AssistantAnswers.append("[" + current_time + "]Opzione 1 o 2? ""\n"))
+                    my_api_key = "AAAAAAAAAA"
+                    my_cse_id = "AAAAAAAAAA"
+                    if choice == "1":
+                        def google_search(search_term, api_key, cse_id, **kwargs):
+                            service = build("customsearch", "v1", developerKey=api_key)
+                            res = service.cse().list(q=search_term, cx=cse_id, **kwargs).execute()
+                            return res
+
+                        results = google_search(query, my_api_key, my_cse_id)
+
+                        print(self.AssistantAnswers.append("[" + current_time + "]"
+                                                                                "\n GoogleSearchResults \n"
+                                                           ))
+                        print(self.AssistantAnswers.append("[" + current_time + "]"
+                                                                                "Title == " +
+                                                           results['items'][0]['title']
+                                                           ))
+                        print(self.AssistantAnswers.append("[" + current_time + "]Link ==" +
+                                                           results['items'][0]['link']
+                                                           ))
+                        snippet = results['items'][0]['snippet'].replace("\n", "")
+                        html_snippet = results['items'][0]['htmlSnippet'].replace("\n", "")
+                        html_snippet = html_snippet.replace("<b>", "")
+                        html_snippet = html_snippet.replace("</b>", "")
+                        html_snippet = html_snippet.replace("<br>", "")
+                        html_snippet = html_snippet.replace("&nbsp;…", ".")
+                        print(self.AssistantAnswers.append("[" + current_time + "]"
+                                                                                "Description == " +
+                                                           snippet +
+                                                           html_snippet
+                                                           ))
+                        print("\n\n")
+
             elif text == "Help" or text == "help":
                 self.AssistantAnswers.append("[" + current_time + "] Per la funzione ricerca digitare: Cerca (es: "
                                                                   "Cerca Casa)")
