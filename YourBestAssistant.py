@@ -3,6 +3,7 @@ from datetime import datetime
 import subprocess
 import webbrowser
 import TTS
+import time
 
 
 def close():
@@ -104,7 +105,7 @@ class Ui_Assistant(object):
             if text == "Ciao" or text == "ciao":
                 self.AssistantAnswers.append("[" + current_time + "] Ciao! Sono il tuo assistente personale. Scrivi "
                                                                   "\"Help\" per una serie di aiuti.")
-                tts("Ciao! Sono il tuo assistente personale, Scrivi Help per una serie di aiuti.")
+                tts("Ciao! Sono il tuo assistente personale. Scrivi help per una serie di aiuti.")
             elif search in text:
                 key = text.replace("Cerca ", "")
                 webbrowser.open_new("https://www.google.com/search?client=firefox-b-d&q=" + key)
@@ -112,7 +113,7 @@ class Ui_Assistant(object):
                 self.AssistantAnswers.append("[" + current_time + "] Per la funzione ricerca digitare: Cerca (es: "
                                                                   "Cerca Casa)")
             elif text == "Exit" or text == "exit":
-                sys.exit()
+                close()
             else:
                 self.AssistantAnswers.append("[" + current_time + "] Scusa, ma non ho capito bene, potresti ripetere?")
 

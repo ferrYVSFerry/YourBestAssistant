@@ -1,15 +1,15 @@
 from gtts import gTTS
 import os
 from playsound import playsound
+import inspect
 
 
 def tts_it(text):
     tts = gTTS(text=text, lang="it")
-    tts.save("1.wav")
-    mp3File = "1.wav"
-    playsound(mp3File)
-    os.remove("1.wav")
-
-
-if __name__ == "__main__":
-    tts_it("ciao")
+    filename = inspect.getframeinfo(inspect.currentframe()).filename
+    path = os.path.dirname(os.path.abspath(filename))
+    tts.save("voice.mp3")
+    mp3File = "voice.mp3"
+    voice_file = path + '\\' + mp3File
+    playsound(voice_file)
+    os.remove(mp3File)
