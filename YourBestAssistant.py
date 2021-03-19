@@ -1,5 +1,4 @@
-from tkinter import END
-
+import tkinter as tk
 from PyQt5 import QtCore, QtWidgets
 from datetime import datetime
 import subprocess
@@ -24,46 +23,56 @@ def tts(text):
     TTS.tts_it(text)
 
 
-def ScrapingRequest(self, text, current_time):
-    my_api_key = "asdasds"
-    my_cse_id = "asdasdasd"
-    text = ""
-    query = text.replace("Cerca ", "")
+def ScrapingRequest(self, current_time,i):
     self.AssistantAnswers.append("[" + current_time + "] Scegli tra:\n"
                                                       "1) Google Search Results ""\n"
                                                       "2) Youtube Links""\n"
                                  )
+    i = 1
+    while i == 1:
+        app = tk.Tk()
+        button1 = tk.Button(app, text="1", command=choise1)
+        button2 = tk.Button(app, text="2")  # command=choise2
+        button1.pack(side=tk.LEFT)
+        button2.pack(side=tk.LEFT)
+        app.mainloop()
 
-    if text == "1":
-        def google_search(search_term, api_key, cse_id, **kwargs):
-            service = build("customsearch", "v1", developerKey=api_key)
-            res = service.cse().list(q=search_term, cx=cse_id, **kwargs).execute()
-            return res
 
-        results = google_search(query, my_api_key, my_cse_id)
+def choise1(self, current_time, text, i):
+    query = text.replace("Cerca ", "")
+    my_api_key = "asdasdasd"
+    my_cse_id = "asdas"
 
-        print(self.AssistantAnswers.append("[" + current_time + "]"
-                                                                "\n GoogleSearchResults \n"
-                                           ))
-        print(self.AssistantAnswers.append("[" + current_time + "]"
-                                                                "Title == " +
-                                           results['items'][0]['title']
-                                           ))
-        print(self.AssistantAnswers.append("[" + current_time + "]Link ==" +
-                                           results['items'][0]['link']
-                                           ))
-        snippet = results['items'][0]['snippet'].replace("\n", "")
-        html_snippet = results['items'][0]['htmlSnippet'].replace("\n", "")
-        html_snippet = html_snippet.replace("<b>", "")
-        html_snippet = html_snippet.replace("</b>", "")
-        html_snippet = html_snippet.replace("<br>", "")
-        html_snippet = html_snippet.replace("&nbsp;…", ".")
-        print(self.AssistantAnswers.append("[" + current_time + "]"
-                                                                "Description == " +
-                                           snippet +
-                                           html_snippet
-                                           ))
-        print("\n\n")
+    def google_search(search_term, api_key, cse_id, **kwargs):
+        service = build("customsearch", "v1", developerKey=api_key)
+        res = service.cse().list(q=search_term, cx=cse_id, **kwargs).execute()
+        return res
+
+    results = google_search(query, my_api_key, my_cse_id)
+
+    print(self.AssistantAnswers.append("[" + current_time + "]"
+                                                            "\n GoogleSearchResults \n"
+                                       ))
+    print(self.AssistantAnswers.append("[" + current_time + "]"
+                                                            "Title == " +
+                                       results['items'][0]['title']
+                                       ))
+    print(self.AssistantAnswers.append("[" + current_time + "]Link ==" +
+                                       results['items'][0]['link']
+                                       ))
+    snippet = results['items'][0]['snippet'].replace("\n", "")
+    html_snippet = results['items'][0]['htmlSnippet'].replace("\n", "")
+    html_snippet = html_snippet.replace("<b>", "")
+    html_snippet = html_snippet.replace("</b>", "")
+    html_snippet = html_snippet.replace("<br>", "")
+    html_snippet = html_snippet.replace("&nbsp;…", ".")
+    print(self.AssistantAnswers.append("[" + current_time + "]"
+                                                            "Description == " +
+                                       snippet +
+                                       html_snippet
+                                       ))
+    print("\n\n")
+    i = 2
 
 
 class Ui_Assistant(object):
